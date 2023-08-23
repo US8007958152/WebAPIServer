@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using WebAPIServer.Entities;
 
 namespace WebAPIServer.Controllers
 {
@@ -22,7 +24,8 @@ namespace WebAPIServer.Controllers
                 using(StreamReader reader = new StreamReader(filePath))
                 {
                     string question = reader.ReadToEnd();
-                    return Ok(question);
+                    DataModel dataModel = JsonConvert.DeserializeObject<DataModel>(question);
+                    return Ok(dataModel);
                 }
 
             }
